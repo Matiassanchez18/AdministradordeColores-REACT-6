@@ -14,16 +14,54 @@ const Formulario = () => {
     reset,
   } = useForm();
 
-  const [arrayColores, setarrayColores] = useState([]);
+  const [arrayColores, setArrayColores] = useState([]);
 
-  const enviadoForm = (data) =>{
-    if(arrayColores.some((icolores) => icolores === data.colores.trim())){
-      alert('El color ya existe')
-    }else{
-      setarrayColores([...arrayColores, data.colores])
-      reset()
-      console.log(arrayColores)
+  const coloresValidos = [
+    "aqua", "black", "blue", "fuchsia", "gray", "green", "lime", "maroon", "navy", "olive", 
+      "purple", "red", "silver", "teal", "white", "yellow", "aliceblue", "antiquewhite", 
+      "aquamarine", "azure", "beige", "bisque", "blanchedalmond", "blueviolet", "brown", 
+      "burlywood", "cadetblue", "chartreuse", "chocolate", "coral", "cornflowerblue", 
+      "cornsilk", "crimson", "cyan", "darkblue", "darkcyan", "darkgoldenrod", "darkgray", 
+      "darkgreen", "darkkhaki", "darkmagenta", "darkolivegreen", "darkorange", "darkorchid", 
+      "darkred", "darksalmon", "darkseagreen", "darkslateblue", "darkslategray", "darkturquoise", 
+      "darkviolet", "deeppink", "deepskyblue", "dimgray", "dodgerblue", "firebrick", "floralwhite", 
+      "forestgreen", "gainsboro", "ghostwhite", "gold", "goldenrod", "gray", "greenyellow", 
+      "honeydew", "hotpink", "indianred", "indigo", "ivory", "khaki", "lavender", "lavenderblush", 
+      "lawngreen", "lemonchiffon", "lightblue", "lightcoral", "lightcyan", "lightgoldenrodyellow", 
+      "lightgreen", "lightgrey", "lightpink", "lightsalmon", "lightseagreen", "lightskyblue", 
+      "lightslategray", "lightsteelblue", "lightyellow", "limegreen", "linen", "magenta", 
+      "mediumaquamarine", "mediumblue", "mediumorchid", "mediumpurple", "mediumseagreen", 
+      "mediumslateblue", "mediumspringgreen", "mediumturquoise", "mediumvioletred", "midnightblue", 
+      "mintcream", "mistyrose", "moccasin", "navajowhite", "oldlace", "olive", "olivedrab", 
+      "orange", "orangered", "orchid", "palegoldenrod", "palegreen", "paleturquoise", "palevioletred", 
+      "papayawhip", "peachpuff", "peru", "pink", "plum", "powderblue", "purple", "rebeccapurple", 
+      "red", "rosybrown", "royalblue", "saddlebrown", "salmon", "sandybrown", "seagreen", "seashell", 
+      "sienna", "silver", "skyblue", "slateblue", "slategray", "snow", "springgreen", "steelblue", 
+      "tan", "teal", "thistle", "tomato", "turquoise", "violet", "wheat", "white", "whitesmoke", 
+      "yellowgreen"
+  ];
+
+
+
+  const enviadoForm = (data) => {
+    const colorInput = data.colores.trim().toLowerCase();
+
+    if (coloresValidos.includes(colorInput)) {
+      
+      if (!arrayColores.includes(colorInput)) {
+        setArrayColores((prevColores) => [...prevColores, colorInput]);
+        reset();  
+      } else {
+        alert("El color ya existe.");
+      }
+    } else {
+      alert("Ingresa solo colres de css");
     }
+  };
+
+  const borrarColores = (borrarColores) =>{
+    const filtrarColores = arrayColores.filter((colores) => colores !== borrarColores)
+    setArrayColores(filtrarColores)
   }
 
   return (
@@ -73,16 +111,19 @@ const Formulario = () => {
               variant="primary"
               className="mt-4 mb-5 me-3 shadow"
             >
-              Primary
+              Agregar Color
             </Button>
           </div>
         </form>
       </article>
+
       <article>
-        <ListaColores arrayColores ={arrayColores}></ListaColores>
+       
+        <ListaColores arrayColores={arrayColores} borrarColores ={borrarColores} />
       </article>
     </section>
   );
 };
 
 export default Formulario;
+
