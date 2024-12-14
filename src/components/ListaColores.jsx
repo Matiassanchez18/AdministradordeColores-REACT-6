@@ -1,11 +1,16 @@
 import React from "react";
 import Colores from "./Colores";
 
-const ListaColores = () => {
+const ListaColores = ({arrayColores}) => {
   return (
   <section>
     <article>
-      <Colores></Colores>
+      {
+        arrayColores.map((colores, posicion)=>(
+          <Colores key={posicion} colores={colores}></Colores>
+        ))
+      }
+      
     </article>
   </section>
   );

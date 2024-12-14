@@ -79,7 +79,7 @@ const Formulario = () => {
         </form>
       </article>
       <article>
-        <ListaColores></ListaColores>
+        <ListaColores arrayColores ={arrayColores}></ListaColores>
       </article>
     </section>
   );
