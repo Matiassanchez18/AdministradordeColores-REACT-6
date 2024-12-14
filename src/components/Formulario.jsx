@@ -4,27 +4,34 @@ import InputGroup from "react-bootstrap/InputGroup";
 import "../assets/css/Formularioc.css";
 import Button from "react-bootstrap/Button";
 import ListaColores from "./ListaColores";
-import { useForm } from "react-hook-form"
+import { useForm } from "react-hook-form";
 
 const Formulario = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm()
+    reset,
+  } = useForm();
 
-  const [arrayColores, setarrayColores] = useState([])
+  const [arrayColores, setarrayColores] = useState([]);
 
-  const enviadoForm = (data) => console.log(data)
-  
-
+  const enviadoForm = (data) =>{
+    if(arrayColores.some((icolores) => icolores === data.colores.trim())){
+      alert('El color ya existe')
+    }else{
+      setarrayColores([...arrayColores, data.colores])
+      reset()
+      console.log(arrayColores)
+    }
+  }
 
   return (
     <section>
       <article className="container shadow-lg mt-5 border ">
         <h5 className="fw-light mt-3 ms-4 mb-4">Administrar colores</h5>
         <form action="" onSubmit={handleSubmit(enviadoForm)}>
-          <div className="border shadow-sm mb-3 row Fondo" >
+          <div className="border shadow-sm mb-3 row Fondo">
             <div
               className="col-lg-6 col-md-6 col-sm-12 mb-3 d-flex justify-content-center align-items-center ms-5"
               id="imagen"
@@ -42,26 +49,32 @@ const Formulario = () => {
                   placeholder="Nombre del color ej: Blue"
                   aria-label="Nombre del color"
                   aria-describedby="basic-addon1"
-                  {...register("colores",{
+                  {...register("colores", {
                     required: "Este campo es obligatorio",
                     minLength: {
                       value: 2,
                       message: "El minimo de caracteres es de 2",
                     },
-                    maxLength:{
+                    maxLength: {
                       value: 15,
                       message: "El maximo de caracteres permitido es de 15",
                     },
-                   })}
+                  })}
                 />
-                <Form.Text className="text-danger" >{errors.colores?.message}</Form.Text>
               </InputGroup>
-              
+              <Form.Text className="text-danger">
+                {errors.colores?.message}
+              </Form.Text>
             </div>
           </div>
           <div className="d-flex justify-content-end">
-          <Button type="submit" variant="primary" className="mt-4 mb-5 me-3 shadow">Primary</Button>
-
+            <Button
+              type="submit"
+              variant="primary"
+              className="mt-4 mb-5 me-3 shadow"
+            >
+              Primary
+            </Button>
           </div>
         </form>
       </article>
