@@ -1,0 +1,10 @@
+#FondoFormulario{
+    background-color: rgb(184, 231, 231);
+}
+
+#imagen{
+    width: 160px;
+    background-size: cover;
+    height: auto;
+}
+
