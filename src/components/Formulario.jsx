@@ -3,6 +3,7 @@ import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import "../assets/css/Formularioc.css";
 import Button from "react-bootstrap/Button";
+import ListaColores from "./ListaColores";
 
 const Formulario = () => {
   return (
@@ -10,7 +11,7 @@ const Formulario = () => {
       <article className="container shadow-lg mt-5 border ">
         <h5 className="fw-light mt-3 ms-4 mb-4">Administrar colores</h5>
         <form action="">
-          <div className="border shadow-sm mb-3 row" id="FondoFormulario">
+          <div className="border shadow-sm mb-3 row Fondo" >
             <div
               className="col-lg-6 col-md-6 col-sm-12 mb-3 d-flex justify-content-center align-items-center ms-5"
               id="imagen"
@@ -37,6 +38,9 @@ const Formulario = () => {
 
           </div>
         </form>
+      </article>
+      <article>
+        <ListaColores></ListaColores>
       </article>
     </section>
   );

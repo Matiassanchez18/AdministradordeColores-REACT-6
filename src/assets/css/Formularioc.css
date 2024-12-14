@@ -1,4 +1,4 @@
-#FondoFormulario{
+.Fondo{
     background-color: rgb(184, 231, 231);
 }
 
@@ -8,3 +8,6 @@
     height: auto;
 }
 
+.DivCard{
+    width: 50px;
+}
