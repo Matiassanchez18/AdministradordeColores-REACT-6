@@ -45,11 +45,12 @@ const Formulario = () => {
 
   const enviadoForm = (data) => {
     const colorInput = data.colores.trim().toLowerCase();
-
+// includes se utiliza para verificar si un objeto existe en el array
+// aqui includ se usa para verificar si el dato enviado desde el form esta en el array de coloresValidos
     if (coloresValidos.includes(colorInput)) {
-      
+      // aqui includ se usa para ver si el color ingresado ya existe
       if (!arrayColores.includes(colorInput)) {
-        setArrayColores((prevColores) => [...prevColores, colorInput]);
+        setArrayColores([...arrayColores, data.colores])
         reset();  
       } else {
         alert("El color ya existe.");
