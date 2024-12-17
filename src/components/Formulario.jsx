@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import "../assets/css/Formularioc.css";
@@ -14,7 +14,9 @@ const Formulario = () => {
     reset,
   } = useForm();
 
-  const [arrayColores, setArrayColores] = useState([]);
+  const colorLocalStorage = JSON.parse(localStorage.getItem('ColorKey')) || []
+
+  const [arrayColores, setArrayColores] = useState(colorLocalStorage);
 
   const coloresValidos = [
     "aqua", "black", "blue", "fuchsia", "gray", "green", "lime", "maroon", "navy", "olive", 
@@ -58,6 +60,8 @@ const Formulario = () => {
       alert("Ingresa solo colres de css");
     }
   };
+
+  useEffect (()=>{console.log('dentro del useEffec'), localStorage.setItem('ColorKey', JSON.stringify(arrayColores))}, [arrayColores])
 
   const borrarColores = (borrarColores) =>{
     const filtrarColores = arrayColores.filter((colores) => colores !== borrarColores)
